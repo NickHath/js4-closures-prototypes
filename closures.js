@@ -12,22 +12,13 @@ function outer() {
   /****** INSTRUCTIONS PROBLEM 1 ******/
   /* Above you're given a function that returns another function which has a
   closure over the name variable. Invoke outer saving the return value into
-  another variable called 'inner'. */
-  
-  // Code Here
-  
-  //Once you do that, invoke inner.
-  
-  //Code Here
+  another variable called 'inner' and invoke it. */
   
   
-  
-  
-  
-  
-  
-  
-  
+  let inner = outer();
+  inner();
+
+
   
   /******************************************************************************\
       #PROBLEM-02
@@ -52,13 +43,10 @@ function outer() {
   
     //Code Here
   
+    let callJake = callFriend('Jake');
+    callJake('435-555-9248');
   
-  
-  
-  
-  
-  
-  
+
   
   /******************************************************************************\
       #PROBLEM-03
@@ -69,21 +57,20 @@ function outer() {
   properly. */
   
   //Code Here
+  function makeCounter() {
+    let count = 0;
+    return function() {
+      return ++count;
+    }
+  }
   
   //Uncomment this once you make your function
-  //   var count = makeCounter();
-  //   count(); // 1
-  //   count(); // 2
-  //   count(); // 3
-  //   count(); // 4
-  
-  
-  
-  
-  
-  
-  
-  
+    var count = makeCounter();
+    count(); // 1
+    count(); // 2
+    count(); // 3
+    count(); // 4
+
   
   
   /******************************************************************************\
@@ -103,10 +90,16 @@ function outer() {
   function counterFactory(value) {
   
     // Code here.
+    let count = value;
   
   
     return {
-
+      inc: function() {
+        return ++count;
+      },
+      dec: function() {
+        return --count;
+      }
     }
   }
   
@@ -142,10 +135,13 @@ function outer() {
     var welcomeText = 'You\'re doing awesome, keep it up ';
   
     // code message function here.
+    function message() {
+      return `${welcomeText}${firstname} ${lastname}.`;
+    }
   
   
     //Uncommment this to return the value of your message function
-    //return message;
+    return message;
   
   }
   
@@ -183,10 +179,14 @@ function outer() {
     // Anything that is being returned is made public and can be invoked from
     // outside our lexical scope
     return {
-      // Code here.
+      publicMethod: function() {
+        return privateMethod();
+      }
     };
   
   })();
+
+  module.publicMethod();
   
   
   
@@ -202,7 +202,12 @@ function outer() {
     var secret = 143;
 
     return {
-      // Code here
+      addToSecret: function(n) {
+        return secret += n;
+      },
+      takeAwayFromSecret: function(n) {
+        return secret -= n;
+      }
     }
   }
   
@@ -229,7 +234,7 @@ function outer() {
    */
   
   function timeOutCounter() {
-    for (var i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 5; i++) {
       setTimeout(function() {
           console.log(i)
       }, i * 1000)
